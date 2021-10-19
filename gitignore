@@ -1,0 +1,19 @@
+# Создано https://www.toptal.com/developers/gitignore/api/linux
+# Отредактируйте на https://www.toptal.com/developers/gitignore?templates=linux
+
+### Linux ###
+* ~
+
+# временные файлы, которые могут быть созданы, если у процесса еще есть дескриптор удаленного файла
+.fuse_hidden *
+
+# Настройки каталога KDE
+.directory
+
+# Папка для мусора Linux, которая может появиться на любом разделе или диске
+.Мусор-*
+
+# Файлы .nfs создаются, когда открытый файл удаляется, но к нему по-прежнему обращаются
+.nfs *
+
+# Конец https://www.toptal.com/developers/gitignore/api/linux
