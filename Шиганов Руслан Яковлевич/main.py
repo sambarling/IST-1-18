@@ -10,6 +10,7 @@ app = FastAPI()
 @app.get("/info/neighbour/{x}/{y}")
 async def root(x, y):
     try:
+        map = 0
         number1 = x
         number2 = y
         with open("pars.csv", encoding='utf-8') as r_file:
@@ -20,6 +21,8 @@ async def root(x, y):
                 #поиск по координатам
                 if number1 == row[1] and number2 == row[2]:
                     map = (row[4])
+                if map == 0:
+                    map = "Wrong coords"    
     except ValidationError as e:
         return {"error": str(e)}
     return {"population_map": map}
