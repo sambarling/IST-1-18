@@ -1,23 +1,28 @@
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel, ValidationError, root_validator
-import geojson
+import csv
+import sys
 
 app = FastAPI()
 
-
-class Dot(BaseModel):
-    x: float
-    y: float
-
-
+#запрос на получения данных для карты населения
 @app.get("/info/neighbour/{x}/{y}")
 async def root(x, y):
     try:
-        dot = Dot(x=x, y=y)
+        number1 = x
+        number2 = y
+        with open("pars.csv", encoding='utf-8') as r_file:
+            # Создаем объект reader, указываем символ-разделитель ";"
+            file_reader = csv.reader(r_file, delimiter=";")
+            # Считывание данных из CSV файла
+            for row in file_reader:
+                #поиск по координатам
+                if number1 == row[1] and number2 == row[2]:
+                    map = (row[4])
     except ValidationError as e:
         return {"error": str(e)}
-    return {"dot_coordinate": str(dot)}
+    return {"population_map": map}
 
 
 if __name__ == "__main__":
