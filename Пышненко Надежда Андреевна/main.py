@@ -10,7 +10,7 @@ def get_html(url):
     #    time.sleep(5) # it's can help with captcha, but time go too long
     headers = {
         'Cookie': 'route=5e3bd265ed8aaeccd1f9d1d9da8e97db; PHPSESSID=9c6ad4d4f9b035cfbaf7f03d8bd26cfd; _ym_uid=1639679206259492146; _ym_d=1639679206; _ym_isad=2; _ym_visorc=w; __cookieConfirm=1; tid=2283384',
-    }
+
     return rq.get(url, headers=headers).text
 
 
@@ -26,9 +26,8 @@ def getParamersOfHouseById(houseId):  # getParametrs by houseId
     countExit = ""
     new_url = f"https://www.reformagkh.ru/myhouse/profile/view/{houseId}/"
     soup = get_soup(new_url)
-    datas = soup.findAll("div", class_="house-specs d-flex fw-600 f-14 lh-19 align-items-start mb-3")
     for data in datas:
-        if ("Общая площадь, кв.м" in data.text):
+if ("Общая площадь, кв.м" in data.text):
             allSquare = data.findAll("div")[-1].text
         if ("Общая площадь жилых помещений, кв.м" in data.text):
             liveSquare = data.findAll("div")[-1].text
@@ -46,7 +45,7 @@ def parseHouses(url, writer):
     page = 1
     while (True):  # check all pages
         newUrl = url + f"&page={page}"
-        print(newUrl) # logs
+print(newUrl) # logs
         soup = get_soup(newUrl)
         table = soup.find("tbody")
         lines = table.findAll("tr")
